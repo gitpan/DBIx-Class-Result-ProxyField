@@ -1,0 +1,26 @@
+Changes
+ignore.txt
+lib/DBIx/Class/Result/ProxyField.pm
+lib/DBIx/Class/ResultSet/ProxyField.pm
+Makefile.PL
+MANIFEST			This list of files
+MANIFEST.SKIP
+README
+t/00-load.t
+t/01-mapping_hash.t
+t/02-accessor.t
+t/03-result.t
+t/04-resultset.t
+t/05-data_column.t
+t/app/db/example.sql
+t/app/insertdb.pl
+t/app/Main.pm
+t/app/Main/Result/Artist.pm
+t/app/Main/Result/Cd.pm
+t/app/Main/Result/Track.pm
+t/app/Main/ResultSet/Track.pm
+t/boilerplate.t
+t/manifest.t
+t/pod-coverage.t
+t/pod.t
+META.yml                                 Module meta-data (added by MakeMaker)
