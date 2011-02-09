@@ -1,30 +1,17 @@
 #!/usr/bin/perl -w
 
-use Test::More;
-
-use t::app::Main;
 use strict;
+use warnings;
 
-system "sqlite3 t/app/db/example.db < t/app/db/example.sql";
-if ($@)
-{
-  plan skip_all => "sqlite3 is require for these tests : $@";
-  exit;
-}
-else
-{
-  eval "use DBIx::Class::Result::ColumnData";
-  if ($@)
-  {
-    plan skip_all => "columns_data test need Result::ColumnData component";
-    exit;
-  }
-  plan tests => 1;
-}
+use Test::More;
+use t::lib::Utils;
+use t::app::Main;
 
-system "perl t/app/insertdb.pl";
+plan tests => 1;
 
 my $schema = t::app::Main->connect('dbi:SQLite:t/app/db/example.db');
+$schema->deploy({add_drop_table => 1});
+populate_database($schema);
 
 use t::app::Main::Result::Track;
 # becarful to respect the order of loading module

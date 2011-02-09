@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               DBIx-Class-Result-ProxyField
-version:            0.01
+version:            0.02
 abstract:           Component Result::ProxyField is a component for DBIx::Class object which permit to defined public name for each column object
 author:
     - Nicolas Oudard <noudard@weborama.com>

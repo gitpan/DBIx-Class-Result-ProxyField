@@ -1,24 +1,17 @@
 #!/usr/bin/perl -w
 
-use Test::More;
-
-use t::app::Main;
 use strict;
+use warnings;
 
-system "sqlite3 t/app/db/example.db < t/app/db/example.sql";
-if ($@)
-{
-  plan skip_all => "sqlite3 is require for these tests : $@";
-  exit;
-}
-else
-{
-  plan tests => 2;
-}
+use Test::More;
+use t::lib::Utils;
+use t::app::Main;
 
-system "perl t/app/insertdb.pl";
+plan tests => 2;
 
-my $schema = t::app::Main->connect('dbi:SQLite:t/app/db/example.db');
+my $schema = t::app::Main->connect('dbi:SQLite:t/example.db');
+$schema->deploy({add_drop_table => 1});
+populate_database($schema);
 
 use t::app::Main::Result::Track;
 t::app::Main::Result::Track->load_components(qw/ Result::ProxyField /);
@@ -30,8 +23,8 @@ my $track = $schema->resultset('Track')->find(1);
 $track->track_title('title of track');
 $track->update();
 my $track1 = $schema->resultset('Track')->find(1);
-use Data::Dumper 'Dumper';
 is $track1->title, 'title of track', "update without arguments works";
+
 $track->update({title => 'new title of track'});
 my $track2 = $schema->resultset('Track')->find(1);
 is $track2->title, 'new title of track', "update without arguments works";
