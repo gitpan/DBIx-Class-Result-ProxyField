@@ -9,7 +9,7 @@ use t::app::Main;
 
 plan tests => 1;
 
-my $schema = t::app::Main->connect('dbi:SQLite:t/app/db/example.db');
+my $schema = t::app::Main->connect('dbi:SQLite:t/example.db');
 $schema->deploy({add_drop_table => 1});
 populate_database($schema);
 
